@@ -149,5 +149,96 @@ body {
   background: #34353A;
   position: absolute;
 }
+
+.menu-link {
+  color: white;
+}
+
+.menu-link:hover {
+  text-decoration: none;
+}
+
+.menu-icon {
+  display: block;
+  width: 29px;
+  height: 29px;
+  margin: 13px 18px 0;
+}
+
+.arrow {
+  background: url("../images/sprites.png") no-repeat -1px -125px;
+}
+
+.arrow2 {
+  background: url("../images/sprites.png") no-repeat -1px -187px;
+}
+
+.vk {
+  background: url("../images/sprites.png") no-repeat -1px -1px;
+}
+
+.facebook {
+  background: url("../images/sprites.png") no-repeat -1px -32px;
+}
+
+.twitter {
+  background: url("../images/sprites.png") no-repeat -1px -63px;
+}
+
+.googleplus {
+  background: url("../images/sprites.png") no-repeat -1px -94px;
+}
+
+.agecontrol {
+  background: url("../images/sprites.png") no-repeat -370px -1px;
+}
+
+.menu-link-text {
+  font: 12px Verdana, serif;
+  margin: 7px 0;
+  text-align: center;
+}
+
+.menu-link-subtext {
+  font: 10px Verdana, serif;
+  margin: 7px 0;
+  text-align: center;
+  min-height: 12px;
+}
+
+.side-social {
+  margin-top: 80px;
+  margin-bottom: 51px;
+}
 /* END SIDEBAR */
 
+.info {
+  margin-right: 25px;
+  margin-left: 85px;
+}
+
+.search-form {
+  float: right;
+}
+
+.search-field {
+  font: 12px Verdana, serif;
+}
+
+.search-button {
+  font: 12px Verdana, serif;
+  background: #dcdad5;
+}
+
+.date {
+  float: left;
+  font: 11px Verdana, serif;
+  margin-top: 48px;
+}
+
+/* BEGIN CONTENT */
+.content {
+  width: 920px;
+  margin-left: 120px;
+}
+/* END CONTENT */
