@@ -218,6 +218,7 @@ body {
 
 .menu-link:hover {
   text-decoration: none;
+  color: #E53E30;
 }
 
 .menu-icon {
@@ -231,24 +232,48 @@ body {
   background: url("../images/sprites.png") no-repeat -1px -125px;
 }
 
+.menu-link:hover .arrow {
+  background: url("../images/sprites.png") no-repeat -32px -125px;
+}
+
 .arrow2 {
   background: url("../images/sprites.png") no-repeat -1px -187px;
+}
+
+.menu-link:hover .arrow2 {
+  background: url("../images/sprites.png") no-repeat -32px -187px;
 }
 
 .vk {
   background: url("../images/sprites.png") no-repeat -1px -1px;
 }
 
+.menu-link:hover .vk {
+  background: url("../images/sprites.png") no-repeat -32px -1px;
+}
+
 .facebook {
   background: url("../images/sprites.png") no-repeat -1px -32px;
+}
+
+.menu-link:hover .facebook {
+  background: url("../images/sprites.png") no-repeat -32px -32px;
 }
 
 .twitter {
   background: url("../images/sprites.png") no-repeat -1px -63px;
 }
 
+.menu-link:hover .twitter {
+  background: url("../images/sprites.png") no-repeat -32px -63px;
+}
+
 .googleplus {
   background: url("../images/sprites.png") no-repeat -1px -94px;
+}
+
+.menu-link:hover .googleplus {
+  background: url("../images/sprites.png") no-repeat -32px -94px;
 }
 
 .agecontrol {
@@ -390,6 +415,10 @@ body {
     padding: 32px 24px 28px 27px;
     text-transform: uppercase;
     margin-top: 21px;
+}
+
+.gallery-button:hover {
+  background: #cd5c45;
 }
 
 .button-arrow {
@@ -559,6 +588,10 @@ body {
     color: #ffffff;
     font: 300 18px / 24px "HelveticaNeueCyr-Light";
     border: none;
+}
+
+.submit-button:hover {
+  background: #1f9383;
 }
   /* END CONTACT */
 
