@@ -618,17 +618,28 @@ body {
     font: 16px / 24px "HelveticaNeueCyr-Roman";
 }
 
-.expand-form {
-  opacity: 0;
+.first-form {
+  transform: scale(0);
+  transition: transform .5s ease-in;
   position: absolute;
-  transition: opacity .3s ease-in;
-  pointer-events: none;
+  width: 400px;
 }
 
-.expand-form.active {
-  position: static;
-  opacity: 1;
-  pointer-events: auto;
+.first-form.active {
+  transform: scale(1);
+  position: relative;
+}
+
+.second-form {
+  transform: scale(0);
+  transition: transform .5s ease-in;
+  position: absolute;
+  width: 400px;
+}
+
+.second-form.active {
+  transform: scale(1);
+  position: relative;
 }
 
 .submit-button {

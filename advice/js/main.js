@@ -30,9 +30,9 @@ $(document).ready(function() {
 
   });
 
-  $('.submit-button').one('click', function(e) {
-    e.preventDefault();
-    $('.expand-form').addClass('active');
+  $('.form-switch-button').on('click', function() {
+    $('.first-form').removeClass('active');
+    $('.second-form').addClass('active');
   });
 
 });
