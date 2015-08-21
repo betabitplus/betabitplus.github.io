@@ -1,3 +1,65 @@
+/* BEGIN FONTS IMPORT */
+@font-face {
+  font-family: 'HelveticaNeueCyr-Medium';
+  src: url('../fonts/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.eot?#iefix') format('embedded-opentype'),  url('../fonts/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.otf')  format('opentype'),
+       url('../fonts/elveticaNeueCyr-Medium/elveticaNeueCyr-Medium.woff') format('woff'), url('../fonts/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.ttf')  format('truetype'), url('../fonts/HelveticaNeueCyr-Medium/HelveticaNeueCyr-Medium.svg#HelveticaNeueCyr-Medium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HelveticaNeueCyr-Light';
+  src: url('../fonts/HelveticaNeueCyr-Light/HelveticaNeueCyr-Light.eot?#iefix') format('embedded-opentype'),  url('../fonts/HelveticaNeueCyr-Light/HelveticaNeueCyr-Light.otf')  format('opentype'),
+       url('../fonts/HelveticaNeueCyr-Light/HelveticaNeueCyr-Light.woff') format('woff'), url('../fonts/HelveticaNeueCyr-Light/HelveticaNeueCyr-Light.ttf')  format('truetype'), url('../fonts/HelveticaNeueCyr-Light/HelveticaNeueCyr-Light.svg#HelveticaNeueCyr-Light') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HelveticaNeueCyr-Bold';
+  src: url('../fonts/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.eot?#iefix') format('embedded-opentype'),  url('../fonts/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.otf')  format('opentype'),
+       url('../fonts/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.woff') format('woff'), url('../fonts/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.ttf')  format('truetype'), url('../fonts/HelveticaNeueCyr-Bold/HelveticaNeueCyr-Bold.svg#HelveticaNeueCyr-Bold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HelveticaNeueCyr-Roman';
+  src: url('../fonts/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.eot?#iefix') format('embedded-opentype'),  url('../fonts/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.otf')  format('opentype'),
+       url('../fonts/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.woff') format('woff'), url('../fonts/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.ttf')  format('truetype'), url('../fonts/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman.svg#HelveticaNeueCyr-Roman') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HelveticaNeueCyr-Italic';
+  src: url('../fonts/HelveticaNeueCyr-Italic/HelveticaNeueCyr-Italic.eot?#iefix') format('embedded-opentype'),  url('../fonts/HelveticaNeueCyr-Italic/HelveticaNeueCyr-Italic.otf')  format('opentype'),
+       url('../fonts/HelveticaNeueCyr-Italic/HelveticaNeueCyr-Italic.woff') format('woff'), url('../fonts/HelveticaNeueCyr-Italic/HelveticaNeueCyr-Italic.ttf')  format('truetype'), url('../fonts/HelveticaNeueCyr-Italic/HelveticaNeueCyr-Italic.svg#HelveticaNeueCyr-Italic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: "MyriadProRegular";
+    src: url("../fonts/MyriadProRegular/MyriadProRegular.eot");
+    src: url("../fonts/MyriadProRegular/MyriadProRegular.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/MyriadProRegular/MyriadProRegular.woff") format("woff"),
+    url("../fonts/MyriadProRegular/MyriadProRegular.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "MyriadProSemiBold";
+    src: url("../fonts/MyriadProSemiBold/MyriadProSemiBold.eot");
+    src: url("../fonts/MyriadProSemiBold/MyriadProSemiBold.eot?#iefix")format("embedded-opentype"),
+    url("../fonts/MyriadProSemiBold/MyriadProSemiBold.woff") format("woff"),
+    url("../fonts/MyriadProSemiBold/MyriadProSemiBold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+/* END FONTS IMPORT */
+
 /* BEGIN BASE STYLING */
 *,
 *:before,
@@ -36,7 +98,7 @@ a:hover {
 
 /* BEGIN GENERAL */
 body {
-  font: 20px "HelveticaNeueCyr Light", serif;
+  font: 20px "HelveticaNeueCyrj-Light", serif;
 }
 
 .wrapper {
@@ -241,4 +303,263 @@ body {
   width: 920px;
   margin-left: 120px;
 }
-/* END CONTENT */
+
+  /* BEGIN GALLERY */
+.scene {
+  background: url(../images/Vector-Smart-Object.png);
+  height: 479px;
+  width: 925px;
+  margin-top: 55px;
+}
+
+.teaser {
+  position: absolute;
+  opacity: 0;
+  transition: opacity .3s ease-in;
+}
+
+.teaser.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.teaser-image {
+  margin: 61px 65px 62px 65px;
+  height: 379px;
+  width: 343px;
+
+}
+
+.teaser-description {
+  float: right;
+  margin-right: 46px;
+  margin-top: 74px;
+}
+
+.teaser-heading {
+    color: #0f0f0f;
+    font: 500 24px "HelveticaNeueCyr-Medium";
+    margin-bottom: 0;
+}
+
+.teaser-text {
+    color: #0f0f0f;
+    font: 300 20px "HelveticaNeueCyr-Light";
+    margin: 0;
+}
+
+.teaser-subtext {
+    color: #0f0f0f;
+    font: 300 14px / 28.8px "HelveticaNeueCyr-Light";
+}
+
+.teaser-offer {
+    color: #0f0f0f;
+    font: 700 49px / 28.8px "HelveticaNeueCyr-Bold";
+    text-decoration: underline;
+}
+
+.teaser-price {
+    color: #0f0f0f;
+    font: 700 58px / 47px "HelveticaNeueCyr-Bold";
+    margin-top: 16px;
+    margin-left: 86px;
+}
+
+.gallery-controls {
+  margin: 29px 0;
+  float: left;
+}
+
+.control-item {
+  border: 1px solid #d8d8d8;
+  margin-right: 19px;
+}
+
+.switch.active .control-item {
+  border: 1px solid #9a5684;
+}
+
+.gallery-button {
+    float: right;
+    background-color: #db7560;
+    border-radius: 6px;
+    color: #ffffff;
+    font: 26px / 25px "HelveticaNeueCyr-Roman";
+    border: none;
+    padding: 32px 24px 28px 27px;
+    text-transform: uppercase;
+    margin-top: 21px;
+}
+
+.button-arrow {
+    background: url('../images/Forward-Icon.png') no-repeat;
+    display: inline-block;
+    width: 11px;
+    height: 18px;
+    margin-left: 8px;
+}
+  /* END GALLERY */
+
+  /* BEGIN DESCRIPTION */
+.description {
+  position: relative;
+  padding: 40px 0 20px 0;
+}
+
+.description:before,
+.description:after {
+  content: "";
+  position: absolute;
+  background: url(../images/devider.png);
+  height: 11px;
+  width: 923px;
+  left: 0;
+}
+
+.description:before {
+  top: 0;
+}
+
+.description:after {
+  bottom: 0;
+}
+
+.description-controls {
+  border-bottom: 1px solid #d8d8d8;
+  padding-bottom: 7px;
+  display: inline-block;
+  padding-right: 100px;
+}
+
+.description-controls a {
+    border: 1px solid #d8d8d8;
+    padding: 16px 21px 13px 21px;
+    color: #7e7e7e;
+    font: 300 14px / 28.8px "HelveticaNeueCyr-Light";
+    text-transform: uppercase;
+}
+
+.description-controls a:hover {
+  text-decoration: none;
+}
+
+.description-controls a.active {
+  border-bottom: 1px solid white;
+  color: #0f0f0f;
+}
+
+.description-item {
+  position: absolute;
+  opacity: 0;
+  transition: opacity .3s ease-in;
+}
+
+.description-item.active {
+  opacity: 1;
+  position: relative;
+}
+
+.info-heading {
+    color: #0f0f0f;
+    font: 700 16px / 26px "HelveticaNeueCyr-Bold";
+    margin-bottom: 0px;
+}
+
+.description-info p {
+    color: #0f0f0f;
+    font: 300 16px / 26px "HelveticaNeueCyr-Light";
+    margin-top: 0px;
+    margin-bottom: 35px;
+}
+
+.description-info p mark {
+    color: #0f0f0f;
+    font: italic 16px / 26px "HelveticaNeueCyr-Italic";
+    background: transparent;
+}
+  /* END DESCRIPTION */
+
+  /* BEGIN DISCOUNT */
+.discount {
+  position: relative;
+}
+
+.discount p {
+    color: #0f0f0f;
+    font: 300 20px / 32px "HelveticaNeueCyr-Light";
+}
+
+.discount p mark {
+    color: #0f0f0f;
+    font: 700 20px / 32px "HelveticaNeueCyr-Bold";
+    background: transparent;
+}
+  /* END DISCOUNT */
+
+  /* BEGIN CONTACT */
+.contact {
+  background: url(../images/Vector-Smart-Object.png);
+  height: 479px;
+  width: 925px;
+  margin-top: 34px;
+  padding: 55px 0;
+}
+
+.form {
+  width: 400px;
+  margin: auto;
+}
+
+.followers {
+    background: url(../images/followers.png);
+    width: 400px;
+    height: 143px;
+}
+
+.followers p {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #ffffff;
+  font: 400 27px 'MyriadProRegular';
+  text-transform: uppercase;
+}
+
+.followers p mark {
+  color: #ffffff;
+  font: 600 45px 'MyriadProSemiBold';
+  background: transparent;
+}
+
+.submission-form input {
+  display: block;
+  width: 100%;
+  margin-top: 24px;
+  height: 48px;
+  border-radius: 6px;
+}
+
+.text-field {
+    border: 2px solid #c6ccd2;
+    color: #c6ccd2;
+    font: 400 16px / 24px 'MyriadProRegular';
+    text-indent: 17px;
+}
+
+.email-field {
+    color: #c6ccd2;
+    font: 16px / 24px "HelveticaNeueCyr-Roman";
+}
+
+.submit-button {
+    background-color: #24aa98;
+    color: #ffffff;
+    font: 300 18px / 24px "HelveticaNeueCyr-Light";
+    border: none;
+}
+  /* END CONTACT */
+
+/* END CONTENT 
