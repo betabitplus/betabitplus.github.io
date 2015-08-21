@@ -326,10 +326,29 @@ body {
 
   /* BEGIN GALLERY */
 .scene {
-  background: url(../images/Vector-Smart-Object.png);
+  background: url(../images/border-vertical.jpg) repeat-y;
+  border-width: 11px;
   height: 479px;
   width: 925px;
   margin-top: 55px;
+  position: relative;
+}
+
+.scene:before {
+  content: "";
+  background: url(../images/border-horizontal.png);
+  width: 925px;
+  height: 10px;
+  position: absolute;
+}
+
+.scene:after {
+  content: "";
+  background: url(../images/border-horizontal.png);
+  width: 925px;
+  height: 10px;
+  position: absolute;
+  bottom: 0;
 }
 
 .teaser {
@@ -414,6 +433,7 @@ body {
 
 .gallery-button:hover {
   background: #cd5c45;
+  text-decoration: none;
 }
 
 .button-arrow {
@@ -522,17 +542,37 @@ body {
   /* END DISCOUNT */
 
   /* BEGIN CONTACT */
+
+  /* BEGIN GALLERY */
 .contact {
-  background: url(../images/Vector-Smart-Object.png);
-  height: 479px;
+  background: url(../images/border-vertical.jpg) repeat-y;
+  border-width: 11px;
   width: 925px;
   margin-top: 34px;
-  padding: 55px 0;
+  position: relative;
+}
+
+.contact:before {
+  content: "";
+  background: url(../images/border-horizontal.png);
+  width: 925px;
+  height: 10px;
+  position: absolute;
+}
+
+.contact:after {
+  content: "";
+  background: url(../images/border-horizontal.png);
+  width: 925px;
+  height: 10px;
+  position: absolute;
+  bottom: 0;
 }
 
 .form {
   width: 400px;
   margin: auto;
+  padding: 55px 0;
 }
 
 .followers {
@@ -576,6 +616,19 @@ body {
 .email-field {
     color: #c6ccd2;
     font: 16px / 24px "HelveticaNeueCyr-Roman";
+}
+
+.expand-form {
+  opacity: 0;
+  position: absolute;
+  transition: opacity .3s ease-in;
+  pointer-events: none;
+}
+
+.expand-form.active {
+  position: static;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .submit-button {

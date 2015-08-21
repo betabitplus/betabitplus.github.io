@@ -10,6 +10,8 @@
 </head>
 <body>
 
+  <a href="top"></a>
+
   <svg style="position: absolute; width: 0; height: 0;" width="0" height="0" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
   <symbol id="icon-home2" viewBox="0 0 1024 1024">
@@ -78,7 +80,7 @@
         </a>
       </div>
 
-      <a href="#" class="menu-link">
+      <a href="#top" class="menu-link">
         <span class="menu-icon arrow2"></span>
         <p class="menu-link-text">Вверх</p>
       </a>
@@ -152,7 +154,7 @@
           <a href="teaser3" class="switch"><img src="images/thumb3.png" alt="" class="control-item"></a>
         </div>
 
-        <button class="gallery-button">Подробнее <span class="button-arrow"></span></button>
+        <a href="#discount" class="gallery-button">Подробнее <span class="button-arrow"></span></a>
 
       </div>
       <!-- END GALLERY -->
@@ -192,6 +194,7 @@
 
       <!-- BEGIN DISCOUNT -->
       <div class="discount">
+        <a name="discount"></a>
         <p>Акция действует до <mark>11 сентября</mark> и будет действительна, если мы наберем <mark>50 желающих.</mark></p> 
         <p>Если Вы хотите получить товар <mark>за половину цены*</mark>, оставьте, пожалуйста, Ваши контактные данные <mark>в форме ниже.</mark></p>
       </div>
@@ -203,7 +206,12 @@
           <div class="followers"><p>уже записалось: <mark>38</mark></p></div>
           <form action="" class="submission-form">
             <input type="text" class="text-field" placeholder="ФИО">
-            <input type="email" class="text-field email-field" placeholder="Почта">
+            <div class="expand-form">
+
+              <input type="email" class="text-field email-field" placeholder="Почта">
+              <input type="tel" class="text-field" placeholder="Телефон">
+
+            </div>
             <input type="submit" class="submit-button" value="Продолжить">
           </form>
         </div>
