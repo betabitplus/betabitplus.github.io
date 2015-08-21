@@ -160,7 +160,6 @@ body {
 .nav-item {
   list-style: none;
   float: left;
-  padding: 0 16px;
 }
 
 .nav-item:hover {
@@ -172,7 +171,7 @@ body {
   color: #323e54;
   display: block;
   height: 60px;
-  padding-top: 25px;
+  padding: 25px 16px 0 16px;
 }
 
 .nav-link:hover {
@@ -594,5 +593,79 @@ body {
   background: #1f9383;
 }
   /* END CONTACT */
+
+/* BEGIN FOOTER */
+.footer {
+  background: #f6f6f6;
+  margin-left: 65px;
+  margin-top: 60px;
+  padding: 15px 15px 5px 25px;
+}
+
+.liveinternet {
+  float: right;
+}
+
+.footer-navigation,
+.foo-social {
+  list-style: none;
+  padding: 0;
+}
+
+.foo-nav-item {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.foo-nav-link {
+  border-bottom: 1px dotted #e53e30;
+  color: #000;
+  font: 14px/21px Verdana;
+}
+
+.foo-nav-link:hover {
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.foo-social-item {
+  display: inline-block;
+}
+
+.foo-social-link {
+  display: block;
+  width: 19px;
+  height: 18px;
+  margin-right: 12px;
+}
+
+.foo-vk {
+  background: url("../images/sprites.png") no-repeat -240px -1px;
+}
+
+.foo-facebook {
+  background: url("../images/sprites.png") no-repeat -271px -1px;
+}
+
+.foo-twitter {
+  background: url("../images/sprites.png") no-repeat -303px -1px;
+}
+
+.foo-google {
+  background: url("../images/sprites.png") no-repeat -335px -1px;
+}
+
+.copyright {
+  font: 12px/18px Verdana;
+}
+
+.subcopy {
+  font: 10px/13px Verdana;
+}
+
+.subcopy-link {
+  color: #e53e30;
+}
+/* END FOOTER */
 
 /* END CONTENT 
