@@ -22,13 +22,6 @@ let makeThrottle = (func, startTimer, gap) => {
   }
 }
 
-// let makeGradient = ((from, to, steps) => {
-//   let currentStep = 0;
-//   return (from, to, steps) => {
-//     return (currentStep < steps) ? from + (to - from) / steps * currentStep++ : to;
-//   };
-// })();
-
 let makeGradient2 = ((from, to, steps) => {
   this.currentStep = 0;
   return (from, to, steps) => {
@@ -40,63 +33,15 @@ makeGradient2.reset = () => {
   this.currentStep = 0;
 }
 
-let makeGradient = (from, to, steps) => {
-  return (makeGradient.step < steps) ? from + (to - from) / steps * makeGradient.step++ : to;
-}
-
-makeGradient.reset = () => {
-  makeGradient.step = 0;
-}
-
-makeGradient.step = 0;
-
-// class Utility {
-//   constructor() {
-//     this.step = 0;
-//   }
-
-//   makeGradient(from, to, steps) {
-//     return (this.step < steps) ? from + (to - from) / steps * this.step++ : to;
-//   }
+// let makeGradient = (from, to, steps) => {
+//   return (makeGradient.step < steps) ? from + (to - from) / steps * makeGradient.step++ : to;
 // }
 
-// Utility.prototype.makeGradient = ((from, to, steps) => {
-//   // let currentStep = this.starter;
-//   // console.log(this.starter);
-//   return (from, to, steps) => {
-//     return (this.starter < steps) ? from + (to - from) / steps * this.starter++ : to;
-//   };
-// })();
-
-// Utility.prototype.makeGradient =(from, to, steps) => {
-//   return (this.step < steps) ? from + (to - from) / steps * this.step++ : to;
+// makeGradient.reset = () => {
+//   makeGradient.step = 0;
 // }
 
-// (function makeGradient2(from, to, steps) {
-//   let currentStep = 0;
-//   return (from, to, steps) => {
-//     return (currentStep < steps) ? from + (to - from) / steps * currentStep++ : to;
-//   };
-// })();
-
-// makeGradient.prototype.clear = () => {
-//   this.currentStep = 0;
-// }
-
-// let ut1 = new Utility();
-// let ut2 = new Utility();
-
-// // ut1.step = 0;
-
-// for (let i = 0; i < 20; i++) {
-//   console.log(makeGradient(0, 2, 10));
-// }
-
-// makeGradient.reset();
-
-// for (let i = 0; i < 20; i++) {
-//   console.log(makeGradient(0, 2, 10));
-// }
+// makeGradient.step = 0;
 
 ////////////////////////
 // VECTOR
@@ -107,20 +52,48 @@ class Vec2 {
     this.x = x;
     this.y = y;
   }
-  add(vec) {
-    this.x += vec.x;
-    this.y += vec.y;
-    return this;
+
+  clone() {
+    return new Vec2(this.x, this.y);
   }
-  replace(vec) {
+
+  copy(vec) {
     this.x = vec.x;
     this.y = vec.y;
     return this;
   }
-  copy() {
-    return new Vec2(this.x, this.y);
+
+  add(vec) {
+    
+    this.x += vec.x;
+    this.y += vec.y;
     return this;
   }
+
+  subtract(vec) {
+    this.x -= vec.x;
+    this.y -= vec.y;
+    return this;
+  }
+
+  angle(vec) {
+    return Math.atan2((vec.y - this.y), (vec.x - this.x));
+  }
+
+  addPolar(angle, speed = 1) {
+    this.x += speed * Math.cos(angle);
+    this.y += speed * Math.sin(angle);
+    return this;
+  }
+
+  // max(value, multiplier) {
+  //   return new Vec2((this.x > max) ? this.x * multiplier : this.x,
+  //                   (this.y > max) ? this.y * multiplier : this.y);
+  // }
+
+  // limit(max, multiplier) {
+    
+  // }
 }
 
 ////////////////////////
@@ -138,12 +111,17 @@ class Event {
 
     if (this.throttling)
       this.action = makeThrottle(this.action, new Date(), this.throttling);
+
     if (this.type === 'keyhold') this.keyListener();
+    if (this.type === 'mousepress') this.mouseListener();
   }
 
   keyListener () {
     document.addEventListener('keydown', (e) => {
-      if (e.keyCode === this.keyCode) this.world.keyboard[this.keyCode] = true;
+      if (e.keyCode === this.keyCode) {
+        e.preventDefault();
+        this.world.keyboard[this.keyCode] = true;
+      }
     });
 
     document.addEventListener('keyup', (e) => {
@@ -152,8 +130,27 @@ class Event {
     });
   }
 
+  mouseListener() {
+    this.world.canvas.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      this.world.isMousePressed = true;
+      this.world.mouseCoords = new Vec2(e.clientX, e.clientY);
+    });
+
+    this.world.canvas.addEventListener('mouseup', (e) => {
+      this.world.isMousePressed = false;
+      if (this.callback) this.callback();
+    });
+
+    this.world.canvas.addEventListener('mousemove', (e) => {
+      e.preventDefault();
+      this.world.mouseCoords = new Vec2(e.clientX, e.clientY);
+    });
+  }
+
   update() {
     if (this.world.keyboard[this.keyCode]) this.action();
+    if (this.type === 'mousepress' && this.world.isMousePressed) this.action();
   }
 }
 
@@ -197,7 +194,6 @@ class World {
     this.canvasWidth = canvas.width;
     this.canvasHeight = canvas.height;
 
-    this.herroDisperse = config.herroDisperse;
     this.herroSpeed = config.herroSpeed;
 
     this._isGameStop = true;
@@ -211,24 +207,28 @@ class World {
     this.events = [];
     this.keyboard = {};
     this.timers = [];
+    this.mouseCoords = {};
+
+    this.isMousePressed = false;
 
     this.herro = new Herro({
       world: this,
-      loc: new Vec2(this.canvasWidth / 2, this.canvasHeight - 60),
-      width: 50,
-      height: 50,
-      speed: this.herroSpeed,
-      disperse: this.herroDisperse
+      loc: new Vec2(50, this.canvasHeight / 2),
+      width: 40,
+      height: 40,
+      healthPoints: 100,
+      speed: this.herroSpeed
     });
 
     for (let i = 0; i < 5; i++) {
 
       let enemy = new Enemy({
         world: this,
-        loc: new Vec2(i * 50, 10),
+        loc: new Vec2(this.canvasWidth - 50, i * 50),
         width: 40,
         height: 40,
         gap: 10,
+        speed: 1,
         life: 3
       });
 
@@ -403,13 +403,13 @@ class Star extends Obj {
     this.loc.add(this.direction);
 
     if (this.notVisible() === 'right')
-      this.loc.replace(new Vec2(0, Math.random() * this.world.canvasHeight));
+      this.loc.copy(new Vec2(0, Math.random() * this.world.canvasHeight));
     if (this.notVisible() === 'left')
-      this.loc.replace(new Vec2(this.world.canvasWidth, Math.random() * this.world.canvasHeight));
+      this.loc.copy(new Vec2(this.world.canvasWidth, Math.random() * this.world.canvasHeight));
     if (this.notVisible() === 'top')
-      this.loc.replace(new Vec2(Math.random() * this.world.canvasWidth, this.world.canvasHeight));
+      this.loc.copy(new Vec2(Math.random() * this.world.canvasWidth, this.world.canvasHeight));
     if (this.notVisible() === 'bottom')
-      this.loc.replace(new Vec2(Math.random() * this.world.canvasWidth, 0));
+      this.loc.copy(new Vec2(Math.random() * this.world.canvasWidth, 0));
   }
 
   draw() {
@@ -428,6 +428,7 @@ class Enemy extends Obj {
   constructor(options) {
     super(options);
     this.gap = options.gap;
+    this.speed = options.speed;
     this.life = options.life - 1;
     this.bombs = this.world.bombs;
 
@@ -435,17 +436,18 @@ class Enemy extends Obj {
     this._moveToRight = true;
 
     this.world.timers.push(new Timer({
-      interval: 1.5,
+      interval: 4,
       repeat: Infinity,
-      scatter: [0, 1],
+      scatter: [-1, 1],
       action: () => {
         this.bombs.push(new Bullet({
-          loc: this.loc.copy().add( new Vec2( (this.width - 5) / 2, 40 ) ),
+          loc: this.loc.clone().add( new Vec2( 0, (this.height - 5) / 2 ) ),
           world: this.world,
           width: 5,
           height: 5,
           color: 'red',
-          direction: new Vec2(0, 3)
+          speed: 3,
+          angle: this.loc.angle( this.loc.clone().add( new Vec2(-1, 0) ) )
         }));
       }
     }));
@@ -458,10 +460,10 @@ class Enemy extends Obj {
   moving() {
     let enemies = this.world.enemies;
 
-    if (enemies[enemies.length - 1].loc.x + this.width >= this.world.canvasWidth)
+    if (enemies[enemies.length - 1].loc.y + this.height >= this.world.canvasHeight)
       this._moveToRight = false;
-    this.loc.add( new Vec2( (this._moveToRight ? 1 : -1), 0 ) );
-    if (this.world.enemies[0].loc.x <= 0) this._moveToRight = true;
+    this.loc.add( new Vec2( 0, (this._moveToRight ? this.speed : -this.speed) ) );
+    if (this.world.enemies[0].loc.y <= 0) this._moveToRight = true;
   }
 
   draw() {
@@ -496,68 +498,67 @@ class Herro extends Obj {
   constructor(options) {
     super(options);
     this.speed = options.speed;
-    this.disperse = options.disperse;
+    this.healthPoints = options.healthPoints;
     this.lateralAcceleration = false;
     this.linearAcceleration = false;
-    // this.acceleration = false;
 
     this.world.events.push(new Event({
       type: 'keyhold',
-      keyCode: 37,
+      keyCode: 65,
       world: this.world,
+      callback: () => {
+        this.lateralAcceleration = false;
+      },
       action: () => {
-        if (this.loc.x > 0) this.loc.x -= parseFloat(makeGradient(0, (this.linearAcceleration ? this.speed / 2 : this.speed), this.disperse));
         this.world.stars.forEach((star) => star.loc.add(new Vec2(getRandom(.1, .2), 0)));
         this.lateralAcceleration = true;
-      },
-      callback: () => {
-        makeGradient.step = 0;
-        this.lateralAcceleration = false;
+
+        if (this.loc.x > 0) this.loc.x -= this.linearAcceleration ? this.speed * Math.sqrt(2) / 2 : this.speed;
       }
     }));
 
     this.world.events.push(new Event({
       type: 'keyhold',
-      keyCode: 39,
+      keyCode: 68,
       world: this.world,
+      callback: () => {
+        this.lateralAcceleration = false;
+      },
       action: () => {
-        if (this.loc.x < this.world.canvasWidth - this.width) this.loc.x += parseFloat(makeGradient(0, (this.linearAcceleration ? this.speed / 2 : this.speed), this.disperse));
         this.world.stars.forEach((star) => star.loc.add(new Vec2(getRandom(-.1, -.2), 0)));
         this.lateralAcceleration = true;
-      },
-      callback: () => {
-        makeGradient.step = 0;
-        this.lateralAcceleration = false;
+
+        if (this.loc.x < this.world.canvasWidth - this.width) this.loc.x += this.linearAcceleration ? this.speed * Math.sqrt(2) / 2 : this.speed;
       }
     }));
 
     this.world.events.push(new Event({
       type: 'keyhold',
-      keyCode: 38,
+      keyCode: 87,
       world: this.world,
+      callback: () => {
+        this.linearAcceleration = false;
+      },
       action: () => {
-        if (this.loc.y > this.world.canvasHeight / 2) this.loc.y -= parseFloat(makeGradient(0, (this.lateralAcceleration ? this.speed / 2 : this.speed), this.disperse));
         this.world.stars.forEach((star) => star.loc.add(new Vec2(0, getRandom(.1, .2))));
         this.linearAcceleration = true;
-      },
-      callback: () => {
-        makeGradient.step = 0;
-        this.linearAcceleration = false;
+
+        if (this.loc.y > 0) this.loc.y -= this.lateralAcceleration ? this.speed * Math.sqrt(2) / 2 : this.speed;
       }
     }));
 
     this.world.events.push(new Event({
       type: 'keyhold',
-      keyCode: 40,
+      keyCode: 83,
       world: this.world,
+      callback: () => {
+        this.linearAcceleration = false;
+      },
       action: () => {
-        if (this.loc.y < this.world.canvasHeight - this.height) this.loc.y += parseFloat(makeGradient(0, (this.lateralAcceleration ? this.speed / 2 : this.speed), this.disperse));
         this.world.stars.forEach((star) => star.loc.add(new Vec2(0, getRandom(-.2, -.1))));
         this.linearAcceleration = true;
-      },
-      callback: () => {
-        makeGradient.step = 0;
-        this.linearAcceleration = false;
+
+        if (this.loc.y < this.world.canvasHeight - this.height) this.loc.y += this.lateralAcceleration ? this.speed * Math.sqrt(2) / 2 : this.speed;
       }
     }));
 
@@ -568,13 +569,36 @@ class Herro extends Obj {
       throttling: 200,
       action: () => {
         this.world.bullets.push(new Bullet({
-          loc: this.loc.copy().add( new Vec2( (this.width - 5) / 2, 0 ) ),
+          loc: this.loc.clone().add( new Vec2( 0, (this.height - 5) / 2 ) ),
           world: this.world,
           width: 5,
           height: 5,
           color: 'blue',
-          direction: new Vec2(0, -10)
+          speed: 10,
+          angle: this.loc.angle(this.loc.clone().add(new Vec2(1, 0)))
         }));
+        // console.log('cannon');
+      }
+    }));
+
+    this.world.events.push(new Event({
+      type: 'mousepress',
+      world: this.world,
+      throttling: 80,
+      action: () => {
+        let bullLoc = this.loc.clone().add( new Vec2( 0, (this.height - 2) / 2 ) );
+
+        this.world.bullets.push(new Bullet({
+          loc: bullLoc,
+          world: this.world,
+          width: 2,
+          height: 2,
+          color: 'orange',
+          speed: 6,
+          angle: bullLoc.angle(this.world.mouseCoords)
+        }));
+        // console.log('machine');
+        // console.log(event.clientX);
       }
     }));
 
@@ -597,12 +621,13 @@ class Herro extends Obj {
 class Bullet extends Obj {
   constructor(options) {
     super(options);
-    this.direction = options.direction;
     this.color = options.color;
+    this.speed = options.speed;
+    this.angle = options.angle;
   }
 
   update() {
-    this.loc.add(this.direction);
+    this.loc.addPolar(this.angle, this.speed);
   }
 
   draw() {
@@ -612,11 +637,21 @@ class Bullet extends Obj {
 }
 
 ////////////////////////
+// CANNON
+////////////////////////
+
+class Cannon extends Bullet {
+  constructor(options) {
+    super(options);
+  }
+}
+
+////////////////////////
 // GAME
 ////////////////////////
 
 let game = new World(document.getElementById('canvas'), {
-  herroSpeed: 3,
+  herroSpeed: 4,
   herroDisperse: 35
 });
 window.game = game;
@@ -629,12 +664,12 @@ setInterval(() => {
   game.fps = 0;
 }, 1000);
 
-document.getElementById('herroSpeed').addEventListener('change', function(e) {
-  game.herro.speed = this.value;
-});
+// document.getElementById('herroSpeed').addEventListener('change', function(e) {
+//   game.herro.speed = this.value;
+// });
 
-document.getElementById('herroDisperse').addEventListener('change', function(e) {
-  game.herro.disperse = this.value;
-});
+// document.getElementById('herroDisperse').addEventListener('change', function(e) {
+//   game.herro.disperse = this.value;
+// });
 
 }).call(this);
