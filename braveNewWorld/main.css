@@ -1,3 +1,7 @@
+body {
+  font-size: 16px;
+}
+
 .letter {
   font-size: 150%;
   float: left;
@@ -22,5 +26,5 @@
 }
 
 .world > .letter {
-  font-size: 260%;
+  font-size: 250%;
 }
