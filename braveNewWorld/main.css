@@ -1,5 +1,26 @@
-.b, .r {
-  font-size: 25px;
+.letter {
+  font-size: 150%;
   float: left;
-  margin-left: 15px;
+  margin-left: 1em;
+}
+
+.letter:first-child {
+  margin-left: 0;
+}
+
+.word {
+  margin-top: 5em;
+  margin-left: 2.5em;
+}
+
+.new {
+  padding-left: 700px;
+}
+
+.paragraph {
+  clear: both;
+}
+
+.world > .letter {
+  font-size: 260%;
 }
