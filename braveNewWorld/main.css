@@ -3,7 +3,7 @@ body {
 }
 
 .letter {
-  font-size: 150%;
+  font-size: 120%;
   float: left;
   margin-left: 1em;
 }
@@ -18,7 +18,7 @@ body {
 }
 
 .new {
-  padding-left: 700px;
+  padding-left: 550px;
 }
 
 .paragraph {
@@ -26,5 +26,5 @@ body {
 }
 
 .world > .letter {
-  font-size: 250%;
+  font-size: 200%;
 }
