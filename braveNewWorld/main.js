@@ -46,84 +46,24 @@ var output = function output() {
   document.querySelector('.b').innerHTML = randomize(B);
 
   var allR = document.querySelectorAll('.r');
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    for (var _iterator = allR[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _i = _step.value;
-      _i.innerHTML = randomize(R);
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
+  for (var _i = 0; _i < allR.length; _i++) {
+    allR[_i].innerHTML = randomize(R);
+  } // for (let i of allR) i.innerHTML = randomize(R);
 
   document.querySelector('.a').innerHTML = randomize(A);
   document.querySelector('.v').innerHTML = randomize(V);
 
   var allE = document.querySelectorAll('.e');
-  var _iteratorNormalCompletion2 = true;
-  var _didIteratorError2 = false;
-  var _iteratorError2 = undefined;
-
-  try {
-    for (var _iterator2 = allE[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-      var _i2 = _step2.value;
-      _i2.innerHTML = randomize(E);
-    }
-  } catch (err) {
-    _didIteratorError2 = true;
-    _iteratorError2 = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion2 && _iterator2.return) {
-        _iterator2.return();
-      }
-    } finally {
-      if (_didIteratorError2) {
-        throw _iteratorError2;
-      }
-    }
-  }
+  for (var _i2 = 0; _i2 < allE.length; _i2++) {
+    allE[_i2].innerHTML = randomize(E);
+  } // for (let i of allE) i.innerHTML = randomize(E);
 
   document.querySelector('.n').innerHTML = randomize(N);
 
   var allW = document.querySelectorAll('.w');
-  var _iteratorNormalCompletion3 = true;
-  var _didIteratorError3 = false;
-  var _iteratorError3 = undefined;
-
-  try {
-    for (var _iterator3 = allW[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-      var _i3 = _step3.value;
-      _i3.innerHTML = randomize(W);
-    }
-  } catch (err) {
-    _didIteratorError3 = true;
-    _iteratorError3 = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion3 && _iterator3.return) {
-        _iterator3.return();
-      }
-    } finally {
-      if (_didIteratorError3) {
-        throw _iteratorError3;
-      }
-    }
-  }
+  for (var _i3 = 0; _i3 < allW.length; _i3++) {
+    allW[_i3].innerHTML = randomize(W);
+  } // for (let i of allW) i.innerHTML = randomize(W);
 
   document.querySelector('.o').innerHTML = randomize(O);
   document.querySelector('.l').innerHTML = randomize(L);
