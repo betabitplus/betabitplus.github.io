@@ -1,0 +1,30 @@
+body {
+  font-size: 16px;
+}
+
+.letter {
+  font-size: 100%;
+  float: left;
+  margin-left: 1em;
+}
+
+.letter:first-child {
+  margin-left: 0;
+}
+
+.word {
+  margin-top: 5em;
+  margin-left: 2.5em;
+}
+
+.new {
+  padding-left: 450px;
+}
+
+.paragraph {
+  clear: both;
+}
+
+.world > .letter {
+  font-size: 160%;
+}
