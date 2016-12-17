@@ -222,7 +222,7 @@ doc.querySelector('.get-answer').addEventListener('click', function(e) {
 
 doc.querySelector('.key-next').addEventListener('click', function(e) {
 
-  if (activeCell === activeCell.parentElement.lastElementChild && inputResult.innerHTML != "0") {
+  if (activeCell === activeCell.parentElement.lastElementChild) {
 
     for (let i = 0; i < destrTable.children.length; i++) {
       destrTable.children[i].insertAdjacentHTML("beforeEnd", "<th></th>");
@@ -230,7 +230,7 @@ doc.querySelector('.key-next').addEventListener('click', function(e) {
 
   }
 
-  if (destrTable.lastElementChild === activeCell.parentElement && inputResult.innerHTML != "0") {
+  if (destrTable.lastElementChild === activeCell.parentElement) {
 
     destrTable.insertAdjacentHTML("beforeEnd", "<tr></tr>");
 
@@ -240,12 +240,12 @@ doc.querySelector('.key-next').addEventListener('click', function(e) {
 
   }
 
-  if (inputResult.innerHTML != "0") {
-    activeCell.classList.remove('active');
-    activeCell.innerHTML = inputResult.innerHTML;
-    activeCell = activeCell.nextElementSibling;
-    activeCell.classList.add('active');
-  }
+  // if (inputResult.innerHTML != "0") {
+  activeCell.classList.remove('active');
+  activeCell.innerHTML = inputResult.innerHTML;
+  activeCell = activeCell.nextElementSibling;
+  activeCell.classList.add('active');
+  // }
   // isTyping = true;
 
   inputResult.innerHTML = (activeCell.innerHTML) ? activeCell.innerHTML : 0;
