@@ -99,6 +99,7 @@ let doc = document,
     inputKeyboard = doc.querySelector('.input-keyboard'),
     destrTable = doc.querySelector('.distribution-table tbody'),
     resultBur = doc.querySelector('.result-bar'),
+    information = resultBur.querySelector('.information'),
     isTyping = false,
     isCalculated = false,
     activeCell = doc.querySelector('.distribution-table tr th').nextElementSibling;
@@ -107,7 +108,7 @@ console.log(+destrTable.children[1].children[1].innerHTML);
 
 doc.querySelector('.exit').addEventListener('click', function(e) {
   resultBur.classList.remove('active');
-  resultBur.innerHTML = "<button class='exit'>X</button>";
+  information.innerHTML = "";
 
 });
 
@@ -158,7 +159,7 @@ doc.querySelector('.get-answer').addEventListener('click', function(e) {
     }
 
     // Output Y component
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>Закон распределения компоненты Y:</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>Закон распределения компоненты Y:</p>`);
     for (let i = 0; i < Y[1].length; i++) {
 
       Y[0].push(+destrTable.children[0].children[i + 1].innerHTML);
@@ -168,10 +169,10 @@ doc.querySelector('.get-answer').addEventListener('click', function(e) {
 
     }
 
-    resultBur.insertAdjacentHTML("beforeEnd", `<table><tr>${Yvalues}</tr><tr>${Yprobabilities}</tr></table>`);
+    information.insertAdjacentHTML("beforeEnd", `<table><tr>${Yvalues}</tr><tr>${Yprobabilities}</tr></table>`);
 
     // Output X component
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>Закон распределения компоненты Х:</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<hr><p>Закон распределения компоненты Х:</p>`);
     for (let i = 0; i < X[1].length; i++) {
 
       X[0].push(+destrTable.children[i + 1].children[0].innerHTML);
@@ -181,39 +182,39 @@ doc.querySelector('.get-answer').addEventListener('click', function(e) {
 
     }
 
-    resultBur.insertAdjacentHTML("beforeEnd", `<table><tr>${Xvalues}</tr><tr>${Xprobabilities}</tr></table>`);
+    information.insertAdjacentHTML("beforeEnd", `<table><tr>${Xvalues}</tr><tr>${Xprobabilities}</tr></table>`);
 
     // the mathematical expectation of components
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>Математическое ожидание компонент Y и X:<br></p>`);
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>${initialMoment(Y, 1, "Y").decision}</p>`);
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>${initialMoment(X, 1, "X").decision}</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<hr><p>Математическое ожидание компонент Y и X:<br></p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>${initialMoment(Y, 1, "Y").decision}</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>${initialMoment(X, 1, "X").decision}</p>`);
 
     // expectation of components squared
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>Квадрат Математического ожидания компонент Y и X:<br></p>`);
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>${initialMoment(Y, 2, "Y").decision}</p>`);
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>${initialMoment(X, 2, "X").decision}</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<hr><p>Квадрат Математического ожидания компонент Y и X:<br></p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>${initialMoment(Y, 2, "Y").decision}</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>${initialMoment(X, 2, "X").decision}</p>`);
 
     // variance of components
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>Дисперсия компонент Y и X:<br></p>`);
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>${dispersion(Y, "Y").decision}</p>`);
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>${dispersion(X, "X").decision}</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<hr><p>Дисперсия компонент Y и X:<br></p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>${dispersion(Y, "Y").decision}</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>${dispersion(X, "X").decision}</p>`);
 
     // standard deviation of components
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>Среднее квадратическое отклонение компонент Y и X:<br></p>`);
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>${deviation(Y, "Y").decision}</p>`);
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>${deviation(X, "X").decision}</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<hr><p>Среднее квадратическое отклонение компонент Y и X:<br></p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>${deviation(Y, "Y").decision}</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>${deviation(X, "X").decision}</p>`);
 
     // moment correlation
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>Корреляционный момент:<br></p>`);
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>${correlation(destrTable, initialMoment(X, 1, "X").answer, initialMoment(Y, 1, "Y").answer).decision}</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<hr><p>Корреляционный момент:<br></p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>${correlation(destrTable, initialMoment(X, 1, "X").answer, initialMoment(Y, 1, "Y").answer).decision}</p>`);
 
     // correlation coefficient
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>Коэффициент корреляции:<br></p>`);
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>r<sub>xy</sub> = <b>${+(correlation(destrTable, initialMoment(X, 1, "X").answer, initialMoment(Y, 1, "Y").answer).answer/deviation(X, "X").answer/deviation(Y, "Y").answer).toFixed(4)}</b></p>`);
+    information.insertAdjacentHTML("beforeEnd", `<hr><p>Коэффициент корреляции:<br></p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>r<sub>xy</sub> = <b>${+(correlation(destrTable, initialMoment(X, 1, "X").answer, initialMoment(Y, 1, "Y").answer).answer/deviation(X, "X").answer/deviation(Y, "Y").answer).toFixed(4)}</b></p>`);
 
   } else {
 
-    resultBur.insertAdjacentHTML("beforeEnd", `<p>Все ячейки (кроме границ) должны быть заполнеными!!!</p>`);
+    information.insertAdjacentHTML("beforeEnd", `<p>Все ячейки (кроме границ) должны быть заполнеными!!!</p>`);
 
   }
 
@@ -278,7 +279,7 @@ inputKeyboard.addEventListener('click', function(e) {
       input = inputExpression.innerHTML,
       operand = inputResult.innerHTML;
 
-  if (target.className === 'key') {
+  if (target.classList.contains('key')) {
 
     if (target.dataset.type === 'operation') {
       switch (target.dataset.action) {
