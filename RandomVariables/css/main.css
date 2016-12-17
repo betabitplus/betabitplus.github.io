@@ -68,8 +68,8 @@ body {
 
 .exit {
   position: absolute;
-  right: 100px;
-  top: 20px;
+  right: 7vw;
+  top: 5vh;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -113,8 +113,8 @@ hr {
 
 .get-answer {
   position: absolute;
-  top: 35vh;
-  right: 3vw;
+  top: 30vh;
+  right: 1vw;
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -228,7 +228,7 @@ table tr {
 
 .input-expression,
 .input-result {
-  width: 70vw;
+  width: 69vw;
   /*border: 1px solid red;*/
   float: left;
 }
@@ -244,8 +244,8 @@ table tr {
 }
 
 .key-next {
-  width: 30vw;
-  height: 10vh;
+  width: 29vw;
+  height: 9vh;
   background: #dada70;
   outline: none;
   cursor: pointer;
