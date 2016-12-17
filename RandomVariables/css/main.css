@@ -3,6 +3,44 @@ body {
   /*color: #f5f6f7;*/
 }
 
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?8w55bq');
+  src:  url('../fonts/icomoon.eot?8w55bq#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?8w55bq') format('truetype'),
+    url('../fonts/icomoon.woff?8w55bq') format('woff'),
+    url('../fonts/icomoon.svg?8w55bq#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cancel-circle:before {
+  content: "\e900";
+}
+.icon-arrow-right:before {
+  content: "\e901";
+}
+
+.icon-arrow-right {
+  font-size: 4vh;
+  color: white;
+}
+
 .content-section {
   height: 50vh;
 }
@@ -31,7 +69,7 @@ body {
 .exit {
   position: absolute;
   right: 100px;
-  top: 100px;
+  top: 20px;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -66,12 +104,17 @@ hr {
   animation-name: animatetop;
   animation-duration: 0.4s;
   border-left: 5px solid #1abc9c;
+  min-height: 80px;
+}
+
+.information p {
+  font-size: 3vh;
 }
 
 .get-answer {
   position: absolute;
-  top: 40vh;
-  right: 5vw;
+  top: 35vh;
+  right: 3vw;
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -155,7 +198,7 @@ table {
   border-collapse:collapse;
   border-bottom:1px solid #E5E5E5;
   border-top:1px solid #E5E5E5;
-  margin-bottom:20px; 
+  margin-bottom:20px;
 }
 table td {
   padding:8px 10px;
@@ -170,6 +213,7 @@ table th {
   color: #1abc9c;
   border-right: 1px solid #E5E5E5;
   font-weight: normal;
+  font-size: 3vh;
   background: white;
 }
 table tr {
@@ -190,12 +234,12 @@ table tr {
 }
 
 .input-expression {
-  font: 24px Arial;
+  font: 2vh Arial;
   /*height: 4vh;*/
 }
 
 .input-result {
-  font: 34px Arial;
+  font: 4vh Arial;
   padding: 1vh 0;
 }
 
@@ -205,4 +249,9 @@ table tr {
   background: #dada70;
   outline: none;
   cursor: pointer;
+  border: none;
+}
+
+.key-next:hover {
+  background: #d8d835;
 }
