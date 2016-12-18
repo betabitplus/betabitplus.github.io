@@ -1,13 +1,20 @@
 // A set of arithmetic operations
-let methods = {
-  "-": (a, b) => a - b,
-  "+": (a, b) => a + b,
-  "*": (a, b) => a * b,
-  "/": (a, b) => a / b
+var methods = {
+  "-": function _(a, b) {
+    return a - b;
+  },
+  "+": function _(a, b) {
+    return a + b;
+  },
+  "*": function _(a, b) {
+    return a * b;
+  },
+  "/": function _(a, b) {
+    return a / b;
+  }
 };
-
 function calculator(expression) {
-  let exp = expression.split(' '); // Converting expression
+  var exp = expression.split(' '); // Converting expression
                                    // string to array type
 
   // Converting numbers to type float
@@ -16,7 +23,7 @@ function calculator(expression) {
   });
 
   // Perform multiplying and dividing
-  for (let i = 0; i < exp.length; i++) {
+  for (var i = 0; i < exp.length; i++) {
     if (exp[i] === "*" || exp[i] === "/") { // detect operation
       exp[i - 1] = methods[exp[i]](exp[i - 1], exp[i + 1]);
       exp.splice(i, 2);
@@ -25,7 +32,7 @@ function calculator(expression) {
   }
 
   // Perform addition and subtraction
-  for (let i = 0; i < exp.length; i++) {
+  for (var i = 0; i < exp.length; i++) {
     if (exp[i] === "+" || exp[i] === "-") { // detect operation
       exp[i - 1] = methods[exp[i]](exp[i - 1], exp[i + 1]);
       exp.splice(i, 2);
@@ -37,9 +44,9 @@ function calculator(expression) {
 }
 
 function initialMoment(series, power, name) {
-  let res = 0, ans = `M(${name}<sup><small>${(power - 1) ? power : ""}</small></sup>) = `;
+  var res = 0, ans = `M(${name}<sup><small>${(power - 1) ? power : ""}</small></sup>) = `;
 
-  for (let i = 1; i < series[0].length - 1; i++) {
+  for (var i = 1; i < series[0].length - 1; i++) {
 
     ans += `${+Math.pow(series[0][i], power).toFixed(4)} * ${series[1][i]} + `;
     res += Math.pow(series[0][i], power) * series[1][i];
@@ -53,7 +60,7 @@ function initialMoment(series, power, name) {
 }
 
 function dispersion(series, name) {
-  let res = 0, ans = `D(${name}) = `;
+  var res = 0, ans = `D(${name}) = `;
 
   res = +(initialMoment(series, 2, name).answer - initialMoment(series, 1, name).answer ** 2).toFixed(4);
 
@@ -65,7 +72,7 @@ function dispersion(series, name) {
 }
 
 function deviation(series, name) {
-  let res = 0, ans = `σ(${name}) = `;
+  var res = 0, ans = `σ(${name}) = `;
 
   res = +Math.sqrt(dispersion(series, name).answer).toFixed(4);
   ans += `<b>${res}</b>.`;
@@ -74,11 +81,11 @@ function deviation(series, name) {
 }
 
 function correlation(table, Mx, My) {
-  let res = 0, ans = `μ<sub>xy</sub> = `;
+  var res = 0, ans = `μ<sub>xy</sub> = `;
 
-  for (let i = 1; i < table.children.length - 1; i++) {
+  for (var i = 1; i < table.children.length - 1; i++) {
 
-    for (let j = 1; j < table.children[0].children.length - 1; j++) {
+    for (var j = 1; j < table.children[0].children.length - 1; j++) {
 
       ans += `(${+table.children[i].children[0].innerHTML} - ${Mx}) * (${+table.children[0].children[j].innerHTML} - ${My}) * ${+table.children[i].children[j].innerHTML} + `;
       res += (+table.children[i].children[0].innerHTML - Mx) * (+table.children[0].children[j].innerHTML - My) * +table.children[i].children[j].innerHTML;
@@ -93,7 +100,7 @@ function correlation(table, Mx, My) {
   return {decision: ans, answer: +res.toFixed(4)};
 }
 
-let doc = document,
+var doc = document,
     inputExpression = doc.querySelector('.input-expression'),
     inputResult = doc.querySelector('.input-result'),
     inputKeyboard = doc.querySelector('.input-keyboard'),
@@ -116,25 +123,39 @@ doc.querySelector('.get-answer').addEventListener('click', function(e) {
 
   resultBur.classList.add('active');
 
-  let Ysum = 0, Xsum = 0,
+  var Ysum = 0, Xsum = 0,
       correlationMoment = 0,
       isCorrect = true,
+      totalProbabilities = 0,
       Yvalues = '', Yprobabilities = '',
       Xvalues = '', Xprobabilities = '',
       Y = [['Y'], ['p']],
       X = [['X'], ['p']];
 
   // Check that the table is full
-  for (let i = 0; i < destrTable.children.length - 1; i++)
-    for (let j = 0; j < destrTable.children[0].children.length - 1; j++)
+  for (var i = 0; i < destrTable.children.length - 1; i++)
+    for (var j = 0; j < destrTable.children[0].children.length - 1; j++)
       if (!destrTable.children[i].children[j].innerHTML) isCorrect = false;
 
-  if (isCorrect) {
+    // Check that sum of probabilities is equal one
+    for (var i = 1; i < destrTable.children.length - 1; i++)
+      for (var j = 1; j < destrTable.children[0].children.length - 1; j++)
+        totalProbabilities += +destrTable.children[i].children[j].innerHTML;
+
+  if (!isCorrect) {
+
+    information.insertAdjacentHTML("beforeEnd", `<p>Все ячейки (кроме границ) должны быть заполнеными!!!</p>`);
+
+  } else if (+totalProbabilities.toFixed(4) !== 1) {
+
+    information.insertAdjacentHTML("beforeEnd", `<p>сумма всех вероятностей должна равнятся единице!!!</p>`);
+
+  } else {
 
     // Calculate probabilities for components
-    for (let i = 1; i < destrTable.children.length - 1; i++) {
+    for (var i = 1; i < destrTable.children.length - 1; i++) {
 
-      for (let j = 1; j < destrTable.children[0].children.length - 1; j++) {
+      for (var j = 1; j < destrTable.children[0].children.length - 1; j++) {
 
         Xsum += +destrTable.children[i].children[j].innerHTML;
 
@@ -145,9 +166,9 @@ doc.querySelector('.get-answer').addEventListener('click', function(e) {
 
     }
 
-    for (let j = 1; j < destrTable.children[0].children.length - 1; j++) {
+    for (var j = 1; j < destrTable.children[0].children.length - 1; j++) {
     
-      for (let i = 1; i < destrTable.children.length - 1; i++) {
+      for (var i = 1; i < destrTable.children.length - 1; i++) {
 
         Ysum += +destrTable.children[i].children[j].innerHTML;
 
@@ -160,7 +181,7 @@ doc.querySelector('.get-answer').addEventListener('click', function(e) {
 
     // Output Y component
     information.insertAdjacentHTML("beforeEnd", `<p>Закон распределения компоненты Y:</p>`);
-    for (let i = 0; i < Y[1].length; i++) {
+    for (var i = 0; i < Y[1].length; i++) {
 
       Y[0].push(+destrTable.children[0].children[i + 1].innerHTML);
 
@@ -173,7 +194,7 @@ doc.querySelector('.get-answer').addEventListener('click', function(e) {
 
     // Output X component
     information.insertAdjacentHTML("beforeEnd", `<hr><p>Закон распределения компоненты Х:</p>`);
-    for (let i = 0; i < X[1].length; i++) {
+    for (var i = 0; i < X[1].length; i++) {
 
       X[0].push(+destrTable.children[i + 1].children[0].innerHTML);
 
@@ -212,10 +233,6 @@ doc.querySelector('.get-answer').addEventListener('click', function(e) {
     information.insertAdjacentHTML("beforeEnd", `<hr><p>Коэффициент корреляции:<br></p>`);
     information.insertAdjacentHTML("beforeEnd", `<p>r<sub>xy</sub> = <b>${+(correlation(destrTable, initialMoment(X, 1, "X").answer, initialMoment(Y, 1, "Y").answer).answer/deviation(X, "X").answer/deviation(Y, "Y").answer).toFixed(4)}</b></p>`);
 
-  } else {
-
-    information.insertAdjacentHTML("beforeEnd", `<p>Все ячейки (кроме границ) должны быть заполнеными!!!</p>`);
-
   }
 
 });
@@ -224,7 +241,7 @@ doc.querySelector('.key-next').addEventListener('click', function(e) {
 
   if (activeCell === activeCell.parentElement.lastElementChild) {
 
-    for (let i = 0; i < destrTable.children.length; i++) {
+    for (var i = 0; i < destrTable.children.length; i++) {
       destrTable.children[i].insertAdjacentHTML("beforeEnd", "<th></th>");
     }
 
@@ -234,7 +251,7 @@ doc.querySelector('.key-next').addEventListener('click', function(e) {
 
     destrTable.insertAdjacentHTML("beforeEnd", "<tr></tr>");
 
-    for (let i = 0; i < activeCell.parentElement.children.length; i++) {
+    for (var i = 0; i < activeCell.parentElement.children.length; i++) {
       destrTable.lastElementChild.insertAdjacentHTML("beforeEnd", "<th></th>");
     }
 
@@ -243,18 +260,28 @@ doc.querySelector('.key-next').addEventListener('click', function(e) {
   // if (inputResult.innerHTML != "0") {
   activeCell.classList.remove('active');
   activeCell.innerHTML = inputResult.innerHTML;
-  activeCell = activeCell.nextElementSibling;
+
+  if (activeCell.parentElement === destrTable.children[0]) {
+    activeCell = activeCell.nextElementSibling;
+  } else {
+    if (activeCell !== activeCell.parentElement.lastElementChild.previousElementSibling) {
+      activeCell = activeCell.nextElementSibling;
+    }
+    else {
+      activeCell = activeCell.parentElement.nextElementSibling.children[0];
+    }
+  }
+
   activeCell.classList.add('active');
   // }
   // isTyping = true;
 
   inputResult.innerHTML = (activeCell.innerHTML) ? activeCell.innerHTML : 0;
 
-
 });
 
 destrTable.addEventListener('click', function(e) {
-  let target = e.target;
+  var target = e.target;
 
   if (target.tagName === 'TH') {
 
@@ -275,7 +302,7 @@ destrTable.addEventListener('click', function(e) {
 });
 
 inputKeyboard.addEventListener('click', function(e) {
-  let target = e.target,
+  var target = e.target,
       input = inputExpression.innerHTML,
       operand = inputResult.innerHTML;
 
@@ -309,7 +336,7 @@ inputKeyboard.addEventListener('click', function(e) {
 
           if (activeCell === activeCell.parentElement.lastElementChild) {
 
-            for (let i = 0; i < destrTable.children.length; i++) {
+            for (var i = 0; i < destrTable.children.length; i++) {
               destrTable.children[i].insertAdjacentHTML("beforeEnd", "<th></th>");
             }
 
@@ -319,7 +346,7 @@ inputKeyboard.addEventListener('click', function(e) {
 
             destrTable.insertAdjacentHTML("beforeEnd", "<tr></tr>");
 
-            for (let i = 0; i < activeCell.parentElement.children.length; i++) {
+            for (var i = 0; i < activeCell.parentElement.children.length; i++) {
               destrTable.lastElementChild.insertAdjacentHTML("beforeEnd", "<th></th>");
             }
 
