@@ -67,17 +67,19 @@ body {
 }
 
 .exit {
-  position: absolute;
-  right: 7vw;
-  top: 5vh;
+  position: fixed;
+  right: 3vw;
+  top: 3vh;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  height: 80px;
   background: #c79140;
   border: none;
   z-index: 100;
   cursor: pointer;
   outline: none;
+  font-size: 8vh;
+  color: white;
 }
 
 hr {
