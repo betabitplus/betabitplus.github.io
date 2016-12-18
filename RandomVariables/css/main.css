@@ -68,17 +68,17 @@ body {
 
 .exit {
   position: fixed;
-  right: 3vw;
-  top: 3vh;
+  right: 1vw;
+  top: 1vh;
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   background: #c79140;
   border: none;
   z-index: 100;
   cursor: pointer;
   outline: none;
-  font-size: 8vh;
+  font-size: 6vh;
   color: white;
 }
 
