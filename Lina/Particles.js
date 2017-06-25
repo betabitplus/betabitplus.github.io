@@ -1,6 +1,6 @@
 (function() {
 'use strict'
-
+   
 function ColorLuminance(hex, lum) {
 
   // validate hex string
