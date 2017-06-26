@@ -63,7 +63,7 @@ let createParticles = () => {
           speed: 2 + Math.random() * 3,
           size: 16 + Math.floor(16*m),
           radius: 5 + Math.random() * 5,
-          color: ColorLuminance("88fc6f", 0.1 - Math.random() * 0.24)
+          color: ColorLuminance("31ff1e", 0.1 - Math.random() * 0.24)
         }
         particles.push(data);
       }
