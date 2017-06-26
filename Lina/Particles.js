@@ -27,23 +27,16 @@ let canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
     particles = [], timer = 0, textSize, textShift;
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-var mq = window.matchMedia( "(min-width: 1280px)" );
-if (mq.matches) {
-  textSize = 15;
-  textShift = 150;
-} else {
-  textSize = 8;
-  textShift = 50;
-}
+  canvas.width = 1000;
+  canvas.height = 800;
+  textSize = 12;
+  textShift = 120;
 
 var img = document.getElementById('image1');
 
 let init = () => {
   // Background
-  ctx.fillStyle = "#ffffff";
+  ctx.fillStyle = "#fff";
   ctx.fillRect(0,0,canvas.width,canvas.height);
   // Title
   ctx.font = "bold " + textSize + "em Arial";
@@ -59,8 +52,8 @@ var map = ctx.getImageData(0,0,canvas.width,canvas.height);
 
 let createParticles = () => {
   var data, dy, x, m;
-  for (var k = 0; k < 30; k++) {
-    if (particles.length < 3000) {
+  for (var k = 0; k < 25; k++) {
+    if (particles.length < 2500) {
       x = Math.random() * canvas.width;
       dy = Math.random() * canvas.height;
       m = Math.random();
