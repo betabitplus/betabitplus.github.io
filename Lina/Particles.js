@@ -1,6 +1,6 @@
 (function() {
 'use strict'
-   
+
 function ColorLuminance(hex, lum) {
 
   // validate hex string
@@ -25,24 +25,33 @@ function ColorLuminance(hex, lum) {
 
 let canvas = document.getElementById('canvas'),
     ctx = canvas.getContext('2d'),
-    particles = [], timer = 0;
+    particles = [], timer = 0, textSize, textShift;
 
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+
+var mq = window.matchMedia( "(min-width: 1000px)" );
+if (mq.matches) {
+  textSize = 15;
+  textShift = 150;
+} else {
+  textSize = 8;
+  textShift = 50;
+}
 
 var img = document.getElementById('image1');
 
 let init = () => {
   // Background
   ctx.fillStyle = "#ffffff";
-  // ctx.fillStyle = "white";
   ctx.fillRect(0,0,canvas.width,canvas.height);
   // Title
-  ctx.font = 'bold 15em Arial';
+  ctx.font = "bold " + textSize + "em Arial";
+  // ctx.fillStyle = "#feffff";
   ctx.fillStyle = "#feffff";
-  ctx.fillText("Линочка",30,250);
-  ctx.fillText("С Днем",30,450);
-  ctx.fillText("Рождения",30,650);
+  ctx.fillText("Линочка",30,100 + textShift);
+  ctx.fillText("С Днем",30,300 + textShift);
+  ctx.fillText("Рождения",30,500 + textShift);
 }
 
 init();
