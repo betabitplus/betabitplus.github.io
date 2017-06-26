@@ -30,7 +30,7 @@ let canvas = document.getElementById('canvas'),
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-var mq = window.matchMedia( "(min-width: 1000px)" );
+var mq = window.matchMedia( "(min-width: 1280px)" );
 if (mq.matches) {
   textSize = 15;
   textShift = 150;
